@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看看在哪 · 博客的美化</title>
+    <meta name="description" content="博客的美化 - 记录一次博客视觉升级">
+    <style>
+        :root {
+            --bg: #0f1115;
+            --surface: #171a21;
+            --text-primary: #e8eaed;
+            --text-secondary: #9aa3b2;
+            --text-muted: #6b7280;
+            --accent: #7c9cff;
+            --accent-soft: rgba(124, 156, 255, 0.12);
+            --border: #262b35;
+            --radius: 16px;
+            --max-width: 720px;
+        }
+
+        [data-theme="light"] {
+            --bg: #f7f8fa;
+            --surface: #ffffff;
+            --text-primary: #1a1d23;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --accent: #4f6ef7;
+            --accent-soft: rgba(79, 110, 247, 0.1);
+            --border: #e5e7eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.8;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* 顶部导航 */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(15, 17, 21, 0.72);
+            border-bottom: 1px solid var(--border);
+        }
+
+        [data-theme="light"] .navbar {
+            background: rgba(247, 248, 250, 0.8);
+        }
+
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .nav-brand .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-soft);
+        }
+
+        .back-link {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--accent); text-decoration: none; }
+        .back-link svg {
+            width: 15px; height: 15px;
+            fill: none; stroke: currentColor; stroke-width: 2;
+        }
+
+        /* 文章容器 */
+        .article-wrap {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3.5rem 1.5rem 4rem;
+        }
+
+        /* 文章头部 */
+        .article-header {
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .article-meta .tag {
+            padding: 0.2rem 0.7rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .article-title {
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 文章正文排版 */
+        .article-body {
+            font-size: 1.02rem;
+            color: var(--text-primary);
+        }
+
+        .article-body h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 2.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .article-body h2::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .article-body h3 {
+            font-size: 1.15rem;
+            font-weight: 650;
+            margin: 2rem 0 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .article-body p {
+            margin-bottom: 1.3rem;
+            color: var(--text-secondary);
+        }
+
+        .article-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .article-body ul, .article-body ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .article-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-body blockquote {
+            border-left: 3px solid var(--accent);
+            padding: 0.5rem 0 0.5rem 1.2rem;
+            margin: 1.5rem 0;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .article-body code {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.15rem 0.45rem;
+            border-radius: 6px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.88em;
+            color: var(--accent);
+        }
+
+        .article-body pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .article-body pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-primary);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        .article-body img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .article-body hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0;
+        }
+
+        /* 文章底部 */
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .article-footer .license {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.4rem;
+            background: var(--accent);
+            color: #fff !important;
+            border-radius: 100px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px var(--accent);
+            text-decoration: none;
+        }
+
+        .btn-back svg {
+            width: 15px; height: 15px;
+            fill: none; stroke: currentColor; stroke-width: 2;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .article-wrap { padding: 2rem 1rem 3rem; }
+            .article-body { font-size: 0.98rem; }
+            .article-footer { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <span class="dot"></span> Mofox
+            </a>
+            <a href="../index.html" class="back-link">
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                返回首页
+            </a>
+        </div>
+    </nav>
+
+    <!-- 文章内容 -->
+    <article class="article-wrap">
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="tag">CSS</span>
+                <span>2025-02-28</span>
+                <span>· 约 5 分钟阅读</span>
+            </div>
+            <h1 class="article-title">看看在哪 · 博客的美化</h1>
+            <p class="article-subtitle">记录一次博客视觉升级，从配色到排版，让阅读体验更舒服。</p>
+        </header>
+
+        <div class="article-body">
+            <p>这是我博客美化系列的第一篇，主要记录我如何调整网站的 <strong>配色方案</strong> 和 <strong>文章排版</strong>，让整体阅读体验更舒适。</p>
+
+            <h2>为什么开始美化博客</h2>
+            <p>最初的博客只是一个纯白背景加黑色文字的极简页面，虽然能用，但总觉得缺少一点"人味"。后来我意识到，博客不只是存放文字的地方，它也是我表达审美的一部分。</p>
+
+            <blockquote>
+                好的设计是隐形的，读者不会注意到它，但会感到舒服。
+            </blockquote>
+
+            <h2>配色方案</h2>
+            <p>我最终选择了深色为主、辅以柔和蓝紫色的配色。核心变量如下：</p>
+
+            <pre><code>:root {
+  --bg: #0f1115;
+  --surface: #171a21;
+  --accent: #7c9cff;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa3b2;
+}</code></pre>
+
+            <p>深色背景能减少长时间阅读的视觉疲劳，而 <code>--accent</code> 用于强调按钮、链接和关键元素，让页面有视觉焦点。</p>
+
+            <h2>排版细节</h2>
+            <p>排版上我做了几件事：</p>
+            <ul>
+                <li>正文最大宽度限制在 <strong>720px</strong>，避免一行太长</li>
+                <li>行高设置为 <strong>1.8</strong>，中文阅读更透气</li>
+                <li>段落之间留出足够间距，视觉上更清晰</li>
+                <li>标题前加一条短竖线，形成视觉锚点</li>
+            </ul>
+
+            <h2>暗色 / 亮色切换</h2>
+            <p>通过 CSS 变量 + localStorage，我实现了一键切换主题。核心逻辑是给 <code>&lt;html&gt;</code> 加一个 <code>data-theme="light"</code> 属性，然后在 CSS 里覆盖变量。</p>
+
+            <pre><code>html[data-theme="light"] {
+  --bg: #f7f8fa;
+  --text-primary: #1a1d23;
+  --accent: #4f6ef7;
+}</code></pre>
+
+            <h2>小结</h2>
+            <p>美化博客不是一蹴而就的事，它是一个不断调整的过程。重要的是先动起来，然后在阅读自己文章的过程中，慢慢发现哪里不舒服，再一点点改进。</p>
+
+            <p>下一篇文章，我会聊聊如何用纯 CSS 实现阅读进度条。敬请期待。</p>
+
+            <hr>
+
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+                📝 本文采用 <a href="#">MIT 许可证</a>，欢迎自由转载。
+            </p>
+        </div>
+
+        <footer class="article-footer">
+            <span class="license">© 2025 Mofox · 开源分享</span>
+            <a href="../index.html" class="btn-back">
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                返回首页
+            </a>
+        </footer>
+    </article>
+
+</body>
+</html>

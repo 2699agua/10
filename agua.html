@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>周报</title> chapter1
-	</head>
-	 <style>
+    <title>第一周周报 · 从零搭建博客</title>
+    <meta name="description" content="我的第一份周报：从零搭建博客的坎坷之路">
+    <style>
         :root {
             --bg: #14121c;
             --surface: #1e1a2e;
@@ -21,18 +21,6 @@
             --max-width: 1080px;
         }
 
-        [data-theme="light"] {
-            --bg: #f8f2fc;
-            --surface: #ffffff;
-            --surface-hover: #f3e6f9;
-            --text-primary: #2b1b38;
-            --text-secondary: #634c77;
-            --text-muted: #9a088b8;
-            --accent: #9368e;
-            --accent-soft: rgba(216, 120, 208, 0.12);
-            --border: #e9dcf2;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -42,12 +30,13 @@
         html {
             scroll-behavior: smooth;
         }
-   body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                'PingFang SC', 'Microsoft YaHei', sans-serif;
             background: var(--bg);
             color: var(--text-primary);
             line-height: 1.7;
-            transition: background 0.3s ease, color 0.3s ease;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -55,20 +44,272 @@
             color: inherit;
             text-decoration: none;
         }
-</body>
-		   </div>
-            <h1 class="article-title">我的第一个周报</h1>
-        <div class="article-body">
-            <p>第一周是建立自己的blog，真的十分坎坷。</p>
-            <p>开始是注册账户，开始的时候没有对github有了解，不知道是外网的，登进去全凭运气，进去之后两眼茫然，全是英语。。。。。但由于时间不够就没有去真正的了解这个网站。</p>
-			<p>第二天的时候，才有时间认真去看整个网站的作用，花了一个早上才做出来一个网页，但是无法称为blog，又看了一眼群消息，大家的成品都令我羡慕，我的网页倒是显得廉价。下午我尝试使用AI软件按照指令给我编写网页，并尝试在AI的代码下理解一些代码的含义，并且发现了AI给我编写的代码无法满足我的需求，于是我再次尝试AI编写了一段页面转跳的代码，AI给了我很多代码，但是无一能够成功，我就一点点地尝试，终于成功，虽然只有一个页面可以转跳但是我发现了让我网页无法转跳的那个代码。</p>
-		 	<p>但是目前我的blog仍然存在很多问题，就是我的每一篇blog的编写都要单独写一个html，并且现在两个页面的背景还是十分割裂，其次我在网页代码上也存在很多未知。</p>
-		 	<p>2026.9.12</p>
-		 <blockquote>
-                好的设计是隐形的，读者不会注意到它，但会感到舒服。
-            </blockquote>
 
-            <h2>配色方案</h2>
-            <p>我最终选择了深色为主、辅以柔和蓝紫色的配色。核心变量如下：</p>
-		 </body>
+        /* ===== 导航栏 ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(20, 18, 28, 0.8);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .nav-brand {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 12px var(--accent);
+        }
+
+        .nav-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* ===== 容器 ===== */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ===== 头部 ===== */
+        .hero {
+            padding: 3.5rem 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 750;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero-meta .tag {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(216, 120, 208, 0.25);
+        }
+
+        /* ===== 周报内容卡片 ===== */
+        .report-section {
+            margin-top: 2rem;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+
+        .post-card {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.8rem 2rem;
+            transition: background 0.25s ease, border-color 0.25s ease,
+                transform 0.25s ease, box-shadow 0.25s ease;
+            overflow: hidden;
+        }
+
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), #a78bfa);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s ease;
+        }
+
+        .post-card:hover {
+            background: var(--surface-hover);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .post-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .post-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.85;
+        }
+
+        .post-card p + p {
+            margin-top: 1.2rem;
+        }
+
+        /* 高亮引用 */
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .muted {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .post-date {
+            text-align: right;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        /* ===== 页脚 ===== */
+        .footer {
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+            padding: 2rem 0 3rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .footer-inner a {
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .footer-inner a:hover {
+            color: var(--accent);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-sub {
+                display: none;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .post-card {
+                padding: 1.4rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <span class="dot"></span>
+                agua 的周报
+            </a>
+            <span class="nav-sub">第一周 · 2026.9.12</span>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- 头部 -->
+        <header class="hero">
+            <h1>我的第一份周报<br><span class="accent">从零搭建博客</span></h1>
+            <div class="hero-meta">
+                <span class="tag">第一周</span>
+                <span>2026.9.12</span>
+                <span>·</span>
+                <span>搭建博客 · 踩坑记录</span>
+            </div>
+        </header>
+
+        <!-- 周报正文 -->
+        <main class="report-section">
+            <div class="post-grid">
+                <article class="post-card">
+                    <p>第一周是建立自己的 blog，真的十分坎坷。</p>
+
+                    <p>开始是注册账户，开始的时候没有对 GitHub 有了解，不知道是外网的，登进去全凭运气，进去之后两眼茫然，<span class="highlight">全是英语</span>……但由于时间不够就没有去真正地了解这个网站。</p>
+
+                    <p>第二天的时候，才有时间认真去看整个网站的作用，花了一个早上才做出来一个网页，但是无法称为 blog，又看了一眼群消息，大家的成品都令我羡慕，我的网页倒是显得廉价。下午我尝试使用 AI 软件按照指令给我编写网页，并尝试在 AI 的代码下理解一些代码的含义，并且发现了 AI 给我编写的代码无法满足我的需求，于是我再次尝试 AI 编写了一段页面转跳的代码，AI 给了我很多代码，但是<span class="highlight">无一能够成功</span>，我就一点点地尝试，终于成功，虽然只有一个页面可以转跳但是我发现了让我网页无法转跳的那个代码。</p>
+
+                    <p>但是目前我的 blog 仍然存在很多问题，就是我的每一篇 blog 的编写都要单独写一个 html，并且现在两个页面的背景还是十分割裂，其次我在网页代码上也存在很多未知。</p>
+
+                    <p class="post-date">2026.9.12</p>
+                </article>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div>© 2026 agua · 第一周周报</div>
+            <div>
+                <a href="#">回到顶部 ↑</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
 </html>
